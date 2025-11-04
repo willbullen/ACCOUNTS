@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from dev_env import views
 from dev_env.views_invoice import InvoiceListShadcnView, InvoiceCreateShadcnView, InvoiceDetailShadcnView, InvoiceUpdateShadcnView
-from dev_env.views_lists import BillListShadcnView, BillCreateShadcnView, BillDetailShadcnView, BillUpdateShadcnView, CustomerListShadcnView, CustomerCreateShadcnView, CustomerDetailShadcnView, CustomerUpdateShadcnView, VendorListShadcnView, VendorCreateShadcnView, VendorDetailShadcnView, VendorUpdateShadcnView, BankAccountListShadcnView, BankAccountDetailShadcnView, BankAccountCreateShadcnView, BankAccountUpdateShadcnView
+from dev_env.views_lists import BillListShadcnView, BillCreateShadcnView, BillDetailShadcnView, BillUpdateShadcnView, CustomerListShadcnView, CustomerCreateShadcnView, CustomerDetailShadcnView, CustomerUpdateShadcnView, VendorListShadcnView, VendorCreateShadcnView, VendorDetailShadcnView, VendorUpdateShadcnView, BankAccountListShadcnView, BankAccountDetailShadcnView, BankAccountCreateShadcnView, BankAccountUpdateShadcnView, BalanceSheetShadcnView, IncomeStatementShadcnView
 from dev_env.views_entity import EntityCreateShadcnView
 
 from django_ledger.settings import DJANGO_LEDGER_GRAPHQL_SUPPORT_ENABLED
@@ -34,6 +34,8 @@ urlpatterns = [
     path('entity/<slug:entity_slug>/bank-account/<uuid:bank_account_pk>/detail-shadcn/', BankAccountDetailShadcnView.as_view(), name='bank-account-detail-shadcn'),
     path('entity/<slug:entity_slug>/bank-account/<uuid:bank_account_pk>/update-shadcn/', BankAccountUpdateShadcnView.as_view(), name='bank-account-update-shadcn'),
     path('entity/create-shadcn/', EntityCreateShadcnView.as_view(), name='entity-create-shadcn'),
+    path('entity/<slug:entity_slug>/balance-sheet-shadcn/<int:year>/', BalanceSheetShadcnView.as_view(), name='balance-sheet-shadcn'),
+    path('entity/<slug:entity_slug>/income-statement-shadcn/<int:year>/', IncomeStatementShadcnView.as_view(), name='income-statement-shadcn'),
     path('dashboard/', dashboard_dark_view, name='dashboard_dark'),
     path('', include('django_ledger.urls', namespace='django_ledger')),
 ]

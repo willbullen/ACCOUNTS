@@ -1,0 +1,290 @@
+{% extends 'django_ledger/layouts/base_shadcn.html' %}
+{% load i18n %}
+{% load static %}
+{% load django_ledger %}
+
+{% block content %}
+<div class="min-h-screen bg-[#0a0a0a] text-white p-6">
+    <!-- Breadcrumb Navigation -->
+    <nav class="mb-6">
+        <ol class="flex items-center space-x-2 text-sm text-gray-400">
+            <li><a href="{% url 'django_ledger:home' %}" class="hover:text-white transition-colors">Home</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href="{% url 'django_ledger:entity-dashboard' entity_slug=entity.slug %}" class="hover:text-white transition-colors">{{ entity.name }}</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li class="text-white font-medium">Income Statement</li>
+        </ol>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="mb-8">
+        <div class="flex items-center justify-between mb-4">
+            <div>
+                <h1 class="text-4xl font-bold mb-2">Income Statement</h1>
+                <p class="text-gray-400 text-lg">{{ entity.name }}</p>
+                <p class="text-gray-500 text-sm mt-1">
+                    {% if quarter %}{{ year }} | Q{{ quarter }}
+                    {% elif month %}{{ from_date | date:'F, Y' }}
+                    {% else %}Fiscal Year {{ year }}
+                    {% endif %}
+                    | {{ from_date | date:'m/d/Y' }} - {{ to_date | date:'m/d/Y' }}
+                </p>
+            </div>
+            <div class="flex space-x-3">
+                <a href="{{ request.path }}?format=pdf" 
+                   class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    <span>Export PDF</span>
+                </a>
+                {% if entity %}
+                <a href="{% url 'django_ledger:entity-dashboard' entity_slug=entity.slug %}" 
+                   class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
+                    Back to Dashboard
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Total Revenue Card -->
+        <div class="bg-gradient-to-br from-green-600 to-green-700 rounded-xl p-6 shadow-lg">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="text-sm font-medium text-green-100">Total Revenue</h3>
+                <svg class="w-8 h-8 text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                </svg>
+            </div>
+            <p class="text-3xl font-bold text-white">{% currency_symbol %}{{ tx_digest.income_statement.operating.net_operating_revenue | currency_format }}</p>
+        </div>
+
+        <!-- Total Expenses Card -->
+        <div class="bg-gradient-to-br from-red-600 to-red-700 rounded-xl p-6 shadow-lg">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="text-sm font-medium text-red-100">Total Expenses</h3>
+                <svg class="w-8 h-8 text-red-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/>
+                </svg>
+            </div>
+            <p class="text-3xl font-bold text-white">{% currency_symbol %}{{ tx_digest.income_statement.operating.net_operating_expenses | reverse_sign | currency_format }}</p>
+        </div>
+
+        <!-- Net Income Card -->
+        <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-6 shadow-lg">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="text-sm font-medium text-blue-100">Net Income</h3>
+                <svg class="w-8 h-8 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+            </div>
+            <p class="text-3xl font-bold text-white">{% currency_symbol %}{{ tx_digest.income_statement.net_income | currency_format }}</p>
+        </div>
+    </div>
+
+    <!-- Income Statement Table -->
+    <div class="bg-[#18181b] rounded-xl border border-gray-800 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <tbody>
+                <!-- Operating Revenues Section -->
+                <tr class="bg-gradient-to-r from-green-900/50 to-green-800/50">
+                    <td colspan="{% if tx_digest.by_unit %}4{% else %}3{% endif %}" class="px-6 py-4">
+                        <h2 class="text-2xl font-bold uppercase">Operating Revenues</h2>
+                    </td>
+                </tr>
+                <tr class="bg-[#27272a] text-gray-400 text-sm">
+                    <th class="px-6 py-3 text-left font-medium">Account Number</th>
+                    <th class="px-6 py-3 text-left font-medium">Description</th>
+                    {% if tx_digest.by_unit %}
+                        <th class="px-6 py-3 text-left font-medium">Unit</th>
+                    {% endif %}
+                    <th class="px-6 py-3 text-right font-medium">Balance</th>
+                </tr>
+                {% for acc in tx_digest.income_statement.operating.revenues %}
+                    <tr class="border-t border-gray-800 hover:bg-[#27272a] transition-colors">
+                        <td class="px-6 py-3 text-gray-400 font-mono text-sm">{{ acc.code }}</td>
+                        <td class="px-6 py-3 text-white">{{ acc.name }}</td>
+                        {% if tx_digest.by_unit %}
+                            <td class="px-6 py-3 text-gray-400">{% if acc.unit_name %}{{ acc.unit_name }}{% endif %}</td>
+                        {% endif %}
+                        <td class="px-6 py-3 text-right font-mono text-white">{% currency_symbol %}{{ acc.balance | currency_format }}</td>
+                    </tr>
+                {% endfor %}
+                <tr class="bg-[#27272a] border-t border-gray-700 font-bold text-lg">
+                    <td colspan="{% if tx_digest.by_unit %}3{% else %}2{% endif %}" class="px-6 py-4 text-right text-white">
+                        Net Operating Revenues:
+                    </td>
+                    <td class="px-6 py-4 text-right font-mono text-white">
+                        {% currency_symbol %}{{ tx_digest.income_statement.operating.net_operating_revenue | currency_format }}
+                    </td>
+                </tr>
+
+                <!-- Cost of Goods Sold Section -->
+                <tr class="bg-gradient-to-r from-red-900/50 to-red-800/50 border-t-2 border-gray-700">
+                    <td colspan="{% if tx_digest.by_unit %}4{% else %}3{% endif %}" class="px-6 py-4">
+                        <h2 class="text-2xl font-bold uppercase">Less: Cost of Goods Sold</h2>
+                    </td>
+                </tr>
+                {% for acc in tx_digest.income_statement.operating.cogs %}
+                    <tr class="border-t border-gray-800 hover:bg-[#27272a] transition-colors">
+                        <td class="px-6 py-3 text-gray-400 font-mono text-sm">{{ acc.code }}</td>
+                        <td class="px-6 py-3 text-white">{{ acc.name }}</td>
+                        {% if tx_digest.by_unit %}
+                            <td class="px-6 py-3 text-gray-400">{% if acc.unit_name %}{{ acc.unit_name }}{% endif %}</td>
+                        {% endif %}
+                        <td class="px-6 py-3 text-right font-mono text-white">{% currency_symbol %}{{ acc.balance | reverse_sign | currency_format }}</td>
+                    </tr>
+                {% endfor %}
+                <tr class="bg-[#27272a] border-t border-gray-700 font-bold text-lg">
+                    <td colspan="{% if tx_digest.by_unit %}3{% else %}2{% endif %}" class="px-6 py-4 text-right text-white">
+                        Net COGS:
+                    </td>
+                    <td class="px-6 py-4 text-right font-mono text-white">
+                        {% currency_symbol %}{{ tx_digest.income_statement.operating.net_cogs | currency_format }}
+                    </td>
+                </tr>
+
+                <!-- Gross Profit -->
+                <tr class="bg-gradient-to-r from-blue-900/30 to-blue-800/30 border-t-2 border-blue-700">
+                    <td colspan="{% if tx_digest.by_unit %}3{% else %}2{% endif %}" class="px-6 py-5 text-right">
+                        <span class="text-xl font-bold text-white">Gross Profit:</span>
+                    </td>
+                    <td class="px-6 py-5 text-right">
+                        <span class="text-xl font-bold text-white font-mono">{% currency_symbol %}{{ tx_digest.income_statement.operating.gross_profit | currency_format }}</span>
+                    </td>
+                </tr>
+
+                <!-- Operating Expenses Section -->
+                <tr class="bg-gradient-to-r from-red-900/50 to-red-800/50 border-t-2 border-gray-700">
+                    <td colspan="{% if tx_digest.by_unit %}4{% else %}3{% endif %}" class="px-6 py-4">
+                        <h2 class="text-2xl font-bold uppercase">Operating Expenses</h2>
+                    </td>
+                </tr>
+                {% for acc in tx_digest.income_statement.operating.expenses %}
+                    <tr class="border-t border-gray-800 hover:bg-[#27272a] transition-colors">
+                        <td class="px-6 py-3 text-gray-400 font-mono text-sm">{{ acc.code }}</td>
+                        <td class="px-6 py-3 text-white">{{ acc.name }}</td>
+                        {% if tx_digest.by_unit %}
+                            <td class="px-6 py-3 text-gray-400">{% if acc.unit_name %}{{ acc.unit_name }}{% endif %}</td>
+                        {% endif %}
+                        <td class="px-6 py-3 text-right font-mono text-white">{% currency_symbol %}{{ acc.balance | reverse_sign | currency_format }}</td>
+                    </tr>
+                {% endfor %}
+                <tr class="bg-[#27272a] border-t border-gray-700 font-bold text-lg">
+                    <td colspan="{% if tx_digest.by_unit %}3{% else %}2{% endif %}" class="px-6 py-4 text-right text-white">
+                        Net Operating Expenses:
+                    </td>
+                    <td class="px-6 py-4 text-right font-mono text-white">
+                        {% currency_symbol %}{{ tx_digest.income_statement.operating.net_operating_expenses | reverse_sign | currency_format }}
+                    </td>
+                </tr>
+
+                <!-- Net Operating Income -->
+                <tr class="bg-gradient-to-r from-blue-900/30 to-blue-800/30 border-t-2 border-blue-700">
+                    <td colspan="{% if tx_digest.by_unit %}3{% else %}2{% endif %}" class="px-6 py-5 text-right">
+                        <span class="text-xl font-bold text-white">Net Operating Income (Loss):</span>
+                    </td>
+                    <td class="px-6 py-5 text-right">
+                        <span class="text-xl font-bold text-white font-mono">{% currency_symbol %}{{ tx_digest.income_statement.operating.net_operating_income | currency_format }}</span>
+                    </td>
+                </tr>
+
+                <!-- Other Revenues Section -->
+                {% if tx_digest.income_statement.other.revenues %}
+                <tr class="bg-gradient-to-r from-green-900/50 to-green-800/50 border-t-2 border-gray-700">
+                    <td colspan="{% if tx_digest.by_unit %}4{% else %}3{% endif %}" class="px-6 py-4">
+                        <h2 class="text-2xl font-bold uppercase">Other Revenues</h2>
+                    </td>
+                </tr>
+                {% for acc in tx_digest.income_statement.other.revenues %}
+                    <tr class="border-t border-gray-800 hover:bg-[#27272a] transition-colors">
+                        <td class="px-6 py-3 text-gray-400 font-mono text-sm">{{ acc.code }}</td>
+                        <td class="px-6 py-3 text-white">{{ acc.name }}</td>
+                        {% if tx_digest.by_unit %}
+                            <td class="px-6 py-3 text-gray-400">{% if acc.unit_name %}{{ acc.unit_name }}{% endif %}</td>
+                        {% endif %}
+                        <td class="px-6 py-3 text-right font-mono text-white">{% currency_symbol %}{{ acc.balance | currency_format }}</td>
+                    </tr>
+                {% endfor %}
+                <tr class="bg-[#27272a] border-t border-gray-700 font-bold text-lg">
+                    <td colspan="{% if tx_digest.by_unit %}3{% else %}2{% endif %}" class="px-6 py-4 text-right text-white">
+                        Net Other Revenues:
+                    </td>
+                    <td class="px-6 py-4 text-right font-mono text-white">
+                        {% currency_symbol %}{{ tx_digest.income_statement.other.net_other_revenues | currency_format }}
+                    </td>
+                </tr>
+                {% endif %}
+
+                <!-- Other Expenses Section -->
+                {% if tx_digest.income_statement.other.expenses %}
+                <tr class="bg-gradient-to-r from-red-900/50 to-red-800/50 border-t-2 border-gray-700">
+                    <td colspan="{% if tx_digest.by_unit %}4{% else %}3{% endif %}" class="px-6 py-4">
+                        <h2 class="text-2xl font-bold uppercase">Other Expenses</h2>
+                    </td>
+                </tr>
+                {% for acc in tx_digest.income_statement.other.expenses %}
+                    <tr class="border-t border-gray-800 hover:bg-[#27272a] transition-colors">
+                        <td class="px-6 py-3 text-gray-400 font-mono text-sm">{{ acc.code }}</td>
+                        <td class="px-6 py-3 text-white">{{ acc.name }}</td>
+                        {% if tx_digest.by_unit %}
+                            <td class="px-6 py-3 text-gray-400">{% if acc.unit_name %}{{ acc.unit_name }}{% endif %}</td>
+                        {% endif %}
+                        <td class="px-6 py-3 text-right font-mono text-white">{% currency_symbol %}{{ acc.balance | reverse_sign | currency_format }}</td>
+                    </tr>
+                {% endfor %}
+                <tr class="bg-[#27272a] border-t border-gray-700 font-bold text-lg">
+                    <td colspan="{% if tx_digest.by_unit %}3{% else %}2{% endif %}" class="px-6 py-4 text-right text-white">
+                        Net Other Expenses:
+                    </td>
+                    <td class="px-6 py-4 text-right font-mono text-white">
+                        {% currency_symbol %}{{ tx_digest.income_statement.other.net_other_expenses | currency_format }}
+                    </td>
+                </tr>
+                {% endif %}
+
+                <!-- Net Other Income -->
+                {% if tx_digest.income_statement.other.revenues or tx_digest.income_statement.other.expenses %}
+                <tr class="bg-gradient-to-r from-blue-900/30 to-blue-800/30 border-t-2 border-blue-700">
+                    <td colspan="{% if tx_digest.by_unit %}3{% else %}2{% endif %}" class="px-6 py-5 text-right">
+                        <span class="text-xl font-bold text-white">Net Other Income (Loss):</span>
+                    </td>
+                    <td class="px-6 py-5 text-right">
+                        <span class="text-xl font-bold text-white font-mono">{% currency_symbol %}{{ tx_digest.income_statement.other.net_other_income | currency_format }}</span>
+                    </td>
+                </tr>
+                {% endif %}
+
+                <!-- Net Income Row -->
+                <tr class="bg-gradient-to-r from-blue-900/50 to-blue-800/50 border-t-2 border-blue-700">
+                    <td colspan="{% if tx_digest.by_unit %}3{% else %}2{% endif %}" class="px-6 py-5 text-right">
+                        <span class="text-2xl font-bold text-white">Net Income</span>
+                        <span class="text-sm text-gray-400 ml-2">({{ from_date | date:'M j, Y' }} through {{ to_date | date:'M j, Y' }})</span>
+                    </td>
+                    <td class="px-6 py-5 text-right">
+                        <span class="text-2xl font-bold text-white font-mono">{% currency_symbol %}{{ tx_digest.income_statement.net_income | currency_format }}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="mt-6 flex space-x-3">
+        {% if entity %}
+        <a href="{% url 'django_ledger:entity-dashboard' entity_slug=entity.slug %}" 
+           class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
+            Back to Dashboard
+        </a>
+        {% endif %}
+        <a href="?by_unit=1" 
+           class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
+            View by Unit
+        </a>
+    </div>
+</div>
+{% endblock %}
