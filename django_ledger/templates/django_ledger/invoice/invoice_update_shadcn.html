@@ -1,4 +1,4 @@
-{% extends 'django_ledger/base_shadcn.html' %}
+{% extends 'django_ledger/layouts/base_shadcn.html' %}
 {% load i18n %}
 {% load static %}
 {% load django_ledger %}
@@ -10,7 +10,7 @@
         <nav class="flex items-center space-x-2 text-sm mb-6">
             <a href="/home/my-dashboard" class="text-gray-400 hover:text-white transition-colors">Home</a>
             <span class="text-gray-600">›</span>
-            <a href="{% url 'django_ledger:invoice-list-shadcn' entity_slug=view.kwargs.entity_slug %}" class="text-gray-400 hover:text-white transition-colors">Invoices</a>
+            <a href="{% url 'invoice-list-shadcn' entity_slug=view.kwargs.entity_slug %}" class="text-gray-400 hover:text-white transition-colors">Invoices</a>
             <span class="text-gray-600">›</span>
             <span class="text-white">Update Invoice</span>
         </nav>
@@ -128,7 +128,7 @@
                     </svg>
                     <span>Save Invoice</span>
                 </button>
-                <a href="{% url 'django_ledger:invoice-detail' entity_slug=view.kwargs.entity_slug invoice_pk=invoice.uuid %}" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-lg transition-colors text-center">
+                <a href="{% url 'invoice-detail-shadcn' entity_slug=view.kwargs.entity_slug invoice_pk=invoice.uuid %}" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-lg transition-colors text-center">
                     Cancel
                 </a>
             </div>

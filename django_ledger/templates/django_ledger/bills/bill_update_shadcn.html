@@ -1,4 +1,4 @@
-{% extends 'django_ledger/base_shadcn.html' %}
+{% extends 'django_ledger/layouts/base_shadcn.html' %}
 {% load i18n %}
 {% load static %}
 {% load django_ledger %}
@@ -10,7 +10,7 @@
         <nav class="flex items-center space-x-2 text-sm mb-6">
             <a href="/home/my-dashboard" class="text-gray-400 hover:text-white transition-colors">Home</a>
             <span class="text-gray-600">›</span>
-            <a href="{% url 'django_ledger:bill-list-shadcn' entity_slug=view.kwargs.entity_slug %}" class="text-gray-400 hover:text-white transition-colors">Bills</a>
+            <a href="{% url 'bill-list-shadcn' entity_slug=view.kwargs.entity_slug %}" class="text-gray-400 hover:text-white transition-colors">Bills</a>
             <span class="text-gray-600">›</span>
             <span class="text-white">Update Bill</span>
         </nav>
@@ -25,12 +25,12 @@
                 </div>
                 <div>
                     <h1 class="text-2xl font-bold">Update Bill</h1>
-                    <p class="text-gray-400">{{ bill.bill_number }}</p>
+                    <p class="text-gray-400">{{ bill_model.bill_number }}</p>
                 </div>
             </div>
         </div>
 
-        <form method="post" action="{% url 'django_ledger:bill-update' entity_slug=view.kwargs.entity_slug bill_pk=bill.uuid %}">
+        <form method="post" action="{% url 'django_ledger:bill-update' entity_slug=view.kwargs.entity_slug bill_pk=bill_model.uuid %}">
             {% csrf_token %}
 
             <!-- Customer Information -->
@@ -74,7 +74,7 @@
             </div>
 
             <!-- Accounting Configuration -->
-            {% if not bill.is_configured %}
+            {% if not bill_model.is_configured %}
             <div class="bg-[#1a1a1a] rounded-lg border border-yellow-700 p-6 mb-6">
                 <h2 class="text-lg font-semibold mb-4 flex items-center text-yellow-500">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,7 +128,7 @@
                     </svg>
                     <span>Save Bill</span>
                 </button>
-                <a href="{% url 'django_ledger:bill-detail' entity_slug=view.kwargs.entity_slug bill_pk=bill.uuid %}" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-lg transition-colors text-center">
+                <a href="{% url 'bill-detail-shadcn' entity_slug=view.kwargs.entity_slug bill_pk=bill_model.uuid %}" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-lg transition-colors text-center">
                     Cancel
                 </a>
             </div>
@@ -148,20 +148,20 @@
         </div>
 
         <!-- Additional Actions -->
-        {% if bill.is_configured %}
+        {% if bill_model.is_configured %}
         <div class="mt-8 bg-[#1a1a1a] rounded-lg border border-gray-800 p-6">
             <h2 class="text-lg font-semibold mb-4">Advanced Actions</h2>
             <div class="grid grid-cols-2 gap-4">
-                <a href="{% url 'django_ledger:ledger-bs' entity_slug=view.kwargs.entity_slug ledger_pk=bill.ledger_id %}" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-center text-sm">
+                <a href="{% url 'django_ledger:ledger-bs' entity_slug=view.kwargs.entity_slug ledger_pk=bill_model.ledger_id %}" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-center text-sm">
                     View Balance Sheet
                 </a>
-                <a href="{% url 'django_ledger:ledger-ic' entity_slug=view.kwargs.entity_slug ledger_pk=bill.ledger_id %}" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-center text-sm">
+                <a href="{% url 'django_ledger:ledger-ic' entity_slug=view.kwargs.entity_slug ledger_pk=bill_model.ledger_id %}" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors text-center text-sm">
                     View Income Statement
                 </a>
-                <a href="{% url 'django_ledger:bill-action-lock-ledger' entity_slug=view.kwargs.entity_slug bill_pk=bill.uuid %}" class="bg-green-700 hover:bg-green-600 text-white py-2 px-4 rounded-lg transition-colors text-center text-sm">
+                <a href="{% url 'django_ledger:bill-action-lock-ledger' entity_slug=view.kwargs.entity_slug bill_pk=bill_model.uuid %}" class="bg-green-700 hover:bg-green-600 text-white py-2 px-4 rounded-lg transition-colors text-center text-sm">
                     Lock Ledger
                 </a>
-                <a href="{% url 'django_ledger:bill-action-unlock-ledger' entity_slug=view.kwargs.entity_slug bill_pk=bill.uuid %}" class="bg-red-700 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors text-center text-sm">
+                <a href="{% url 'django_ledger:bill-action-unlock-ledger' entity_slug=view.kwargs.entity_slug bill_pk=bill_model.uuid %}" class="bg-red-700 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors text-center text-sm">
                     Unlock Ledger
                 </a>
             </div>
