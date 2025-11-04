@@ -10,7 +10,7 @@
         <ol class="flex items-center space-x-2 text-sm text-gray-400">
             <li><a href="{% url 'django_ledger:home' %}" class="hover:text-white transition-colors">Home</a></li>
             <li><span class="mx-2">/</span></li>
-            <li><a href="{% url 'django_ledger:entity-dashboard' entity_slug=entity.slug %}" class="hover:text-white transition-colors">{{ entity.name }}</a></li>
+            <li><a href="{% url 'entity-dashboard-shadcn' entity_slug=entity.slug %}" class="hover:text-white transition-colors">{{ entity.name }}</a></li>
             <li><span class="mx-2">/</span></li>
             <li class="text-white font-medium">Balance Sheet</li>
         </ol>
@@ -39,7 +39,7 @@
                     <span>Export PDF</span>
                 </a>
                 {% if entity %}
-                <a href="{% url 'django_ledger:entity-dashboard' entity_slug=entity.slug %}" 
+                <a href="{% url 'entity-dashboard-shadcn' entity_slug=entity.slug %}" 
                    class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
                     Back to Dashboard
                 </a>
