@@ -2,8 +2,8 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from dev_env import views
-from dev_env.views_invoice import InvoiceListShadcnView
-from dev_env.views_lists import BillListShadcnView, CustomerListShadcnView, VendorListShadcnView
+from dev_env.views_invoice import InvoiceListShadcnView, InvoiceCreateShadcnView
+from dev_env.views_lists import BillListShadcnView, BillCreateShadcnView, CustomerListShadcnView, CustomerCreateShadcnView, VendorListShadcnView, VendorCreateShadcnView
 from dev_env.views_entity import EntityCreateShadcnView
 
 from django_ledger.settings import DJANGO_LEDGER_GRAPHQL_SUPPORT_ENABLED
@@ -14,9 +14,13 @@ urlpatterns = [
     path('test-shadcn/', views.test_shadcn, name='test-shadcn'),
     path('entity/<slug:entity_slug>/dashboard-shadcn/', views.entity_dashboard_shadcn, name='entity-dashboard-shadcn'),
     path('entity/<slug:entity_slug>/invoices-shadcn/', InvoiceListShadcnView.as_view(), name='invoice-list-shadcn'),
+    path('entity/<slug:entity_slug>/invoice/create-shadcn/', InvoiceCreateShadcnView.as_view(), name='invoice-create-shadcn'),
     path('entity/<slug:entity_slug>/bills-shadcn/', BillListShadcnView.as_view(), name='bill-list-shadcn'),
+    path('entity/<slug:entity_slug>/bill/create-shadcn/', BillCreateShadcnView.as_view(), name='bill-create-shadcn'),
     path('entity/<slug:entity_slug>/customers-shadcn/', CustomerListShadcnView.as_view(), name='customer-list-shadcn'),
+    path('entity/<slug:entity_slug>/customer/create-shadcn/', CustomerCreateShadcnView.as_view(), name='customer-create-shadcn'),
     path('entity/<slug:entity_slug>/vendors-shadcn/', VendorListShadcnView.as_view(), name='vendor-list-shadcn'),
+    path('entity/<slug:entity_slug>/vendor/create-shadcn/', VendorCreateShadcnView.as_view(), name='vendor-create-shadcn'),
     path('entity/create-shadcn/', EntityCreateShadcnView.as_view(), name='entity-create-shadcn'),
     path('dashboard/', dashboard_dark_view, name='dashboard_dark'),
     path('', include('django_ledger.urls', namespace='django_ledger')),
