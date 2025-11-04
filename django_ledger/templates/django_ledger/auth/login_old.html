@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Ledger | Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tailwind-output.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .login-container {
+        <div class="hero-body">
+            <div class="container is-fluid">
+                <div class="columns is-centered">
+                    <div class="column is-6-tablet is-4-desktop">
+                        <div class="box">
+                            <div class="container" style="padding: 20px;">
+                                <div class="figure">
+                                    <img src="{% static 'django_ledger/logo/django-ledger-logo.png' %}" alt="">
+                                </div>
+                            </div>
+                            <form action="{% url 'django_ledger:login' %}" method="post" id="djl-el-login-form">
+                                {% csrf_token %}
+                                <div class="columns is-multiline">
+                                    <div class="column is-12">{{ form }}</div>
+                                    <div class="column is-12">
+                                        <button type="submit"
+                                                class="button is-primary is-fullwidth">
+                                            {% trans 'Login' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block footer %}{% endblock %}

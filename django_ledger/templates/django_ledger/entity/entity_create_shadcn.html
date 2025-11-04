@@ -1,0 +1,150 @@
+{% extends 'django_ledger/layouts/base_shadcn.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}Create New Entity{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <nav class="flex mb-4" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="{% url 'django_ledger:home' %}" class="text-gray-400 hover:text-blue-500">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-gray-500">Create Entity</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+        
+        <h1 class="text-3xl font-bold text-gray-100">Create New Entity</h1>
+        <p class="text-gray-400 mt-2">Set up a new business entity to manage your accounting</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-gray-900 border border-gray-800 rounded-lg shadow-lg">
+        <form action="{% url 'django_ledger:entity-create' %}" method="post" id="entityForm" class="p-6">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="mb-6 p-4 bg-red-900/20 border border-red-800 rounded-md">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-red-400">There were errors with your submission</h3>
+                            <div class="mt-2 text-sm text-red-300">
+                                {{ form.non_field_errors }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Basic Information -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-100 mb-4 pb-2 border-b border-gray-700">
+                    <svg class="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                    Basic Information
+                </h2>
+                
+                <div class="grid grid-cols-1 gap-4">
+                    {% for field in form %}
+                        {% if field.name == 'name' or field.name == 'admin' %}
+                            {% include 'django_ledger/components/shadcn/form_field.html' with field=field %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Address Information -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-100 mb-4 pb-2 border-b border-gray-700">
+                    <svg class="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    Address Information
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {% for field in form %}
+                        {% if field.name == 'address_1' or field.name == 'address_2' or field.name == 'city' or field.name == 'state' or field.name == 'zip_code' or field.name == 'country' %}
+                            {% include 'django_ledger/components/shadcn/form_field.html' with field=field %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-100 mb-4 pb-2 border-b border-gray-700">
+                    <svg class="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    Contact Information
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {% for field in form %}
+                        {% if field.name == 'email' or field.name == 'website' or field.name == 'phone_number' %}
+                            {% include 'django_ledger/components/shadcn/form_field.html' with field=field %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Accounting Settings -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-100 mb-4 pb-2 border-b border-gray-700">
+                    <svg class="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    Accounting Settings
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {% for field in form %}
+                        {% if field.name == 'fy_start_month' or field.name == 'activate_all_accounts' or field.name == 'use_accrual_method' or field.name == 'populate_default_coa' or field.name == 'fill_with_sample_data' %}
+                            {% include 'django_ledger/components/shadcn/form_field.html' with field=field %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-700">
+                <a href="{% url 'django_ledger:home' %}" 
+                   class="inline-flex items-center px-4 py-2 border border-gray-700 rounded-md text-sm font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-gray-600 transition-colors">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Cancel
+                </a>
+                <button type="submit" 
+                        class="inline-flex items-center px-6 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 transition-colors">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    Create Entity
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

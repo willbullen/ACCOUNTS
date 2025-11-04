@@ -1,0 +1,54 @@
+{% comment %}
+shadcn/ui Form Field Component
+Usage: {% include 'django_ledger/components/shadcn/form_field.html' with field=form.field_name %}
+{% endcomment %}
+
+<div class="form-field mb-4">
+    <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-200 mb-2">
+        {{ field.label }}
+        {% if field.field.required %}
+            <span class="text-red-500">*</span>
+        {% endif %}
+    </label>
+    
+    {% if field.field.widget.input_type == 'checkbox' %}
+        <div class="flex items-center space-x-2">
+            {{ field }}
+            <label for="{{ field.id_for_label }}" class="text-sm text-gray-300">
+                {{ field.help_text }}
+            </label>
+        </div>
+    {% elif field.field.widget.input_type == 'select' %}
+        {{ field }}
+    {% elif field.field.widget.input_type == 'textarea' %}
+        <textarea 
+            name="{{ field.name }}"
+            id="{{ field.id_for_label }}"
+            class="flex min-h-[80px] w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50"
+            {% if field.field.required %}required{% endif %}
+            {% if field.field.widget.attrs.placeholder %}placeholder="{{ field.field.widget.attrs.placeholder }}"{% endif %}
+        >{{ field.value|default:'' }}</textarea>
+    {% else %}
+        <input 
+            type="{{ field.field.widget.input_type }}"
+            name="{{ field.name }}"
+            id="{{ field.id_for_label }}"
+            value="{{ field.value|default:'' }}"
+            class="flex h-10 w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50"
+            {% if field.field.required %}required{% endif %}
+            {% if field.field.widget.attrs.placeholder %}placeholder="{{ field.field.widget.attrs.placeholder }}"{% endif %}
+        />
+    {% endif %}
+    
+    {% if field.help_text and field.field.widget.input_type != 'checkbox' %}
+        <p class="text-sm text-gray-400 mt-1">{{ field.help_text }}</p>
+    {% endif %}
+    
+    {% if field.errors %}
+        <div class="text-sm text-red-500 mt-1">
+            {% for error in field.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
