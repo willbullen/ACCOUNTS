@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from dev_env import views
 from dev_env.views_invoice import InvoiceListShadcnView, InvoiceCreateShadcnView, InvoiceDetailShadcnView, InvoiceUpdateShadcnView
-from dev_env.views_lists import BillListShadcnView, BillCreateShadcnView, BillDetailShadcnView, BillUpdateShadcnView, CustomerListShadcnView, CustomerCreateShadcnView, CustomerDetailShadcnView, CustomerUpdateShadcnView, VendorListShadcnView, VendorCreateShadcnView, VendorDetailShadcnView, VendorUpdateShadcnView
+from dev_env.views_lists import BillListShadcnView, BillCreateShadcnView, BillDetailShadcnView, BillUpdateShadcnView, CustomerListShadcnView, CustomerCreateShadcnView, CustomerDetailShadcnView, CustomerUpdateShadcnView, VendorListShadcnView, VendorCreateShadcnView, VendorDetailShadcnView, VendorUpdateShadcnView, BankAccountListShadcnView, BankAccountDetailShadcnView, BankAccountCreateShadcnView, BankAccountUpdateShadcnView
 from dev_env.views_entity import EntityCreateShadcnView
 
 from django_ledger.settings import DJANGO_LEDGER_GRAPHQL_SUPPORT_ENABLED
@@ -29,6 +29,10 @@ urlpatterns = [
     path('entity/<slug:entity_slug>/vendor/create-shadcn/', VendorCreateShadcnView.as_view(), name='vendor-create-shadcn'),
     path('entity/<slug:entity_slug>/vendor/<uuid:vendor_pk>/detail-shadcn/', VendorDetailShadcnView.as_view(), name='vendor-detail-shadcn'),
     path('entity/<slug:entity_slug>/vendor/<uuid:vendor_pk>/update-shadcn/', VendorUpdateShadcnView.as_view(), name='vendor-update-shadcn'),
+    path('entity/<slug:entity_slug>/bank-accounts-shadcn/', BankAccountListShadcnView.as_view(), name='bank-account-list-shadcn'),
+    path('entity/<slug:entity_slug>/bank-account/create-shadcn/', BankAccountCreateShadcnView.as_view(), name='bank-account-create-shadcn'),
+    path('entity/<slug:entity_slug>/bank-account/<uuid:bank_account_pk>/detail-shadcn/', BankAccountDetailShadcnView.as_view(), name='bank-account-detail-shadcn'),
+    path('entity/<slug:entity_slug>/bank-account/<uuid:bank_account_pk>/update-shadcn/', BankAccountUpdateShadcnView.as_view(), name='bank-account-update-shadcn'),
     path('entity/create-shadcn/', EntityCreateShadcnView.as_view(), name='entity-create-shadcn'),
     path('dashboard/', dashboard_dark_view, name='dashboard_dark'),
     path('', include('django_ledger.urls', namespace='django_ledger')),
