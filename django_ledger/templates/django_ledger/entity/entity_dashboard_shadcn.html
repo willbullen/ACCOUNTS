@@ -1,0 +1,244 @@
+{% extends 'django_ledger/layouts/base_shadcn.html' %}
+{% load i18n %}
+{% load static %}
+{% load django_ledger %}
+
+{% block title %}{{ entity.name }} Dashboard{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="flex" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+            <a href="{% url 'django_ledger:home' %}" class="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+                Home
+            </a>
+        </li>
+        <li>
+            <div class="flex items-center">
+                <svg class="w-6 h-6 text-muted-foreground" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="ml-1 text-sm font-medium text-foreground md:ml-2">{{ entity.name }}</span>
+            </div>
+        </li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Page Header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+            <h1 class="text-3xl font-bold tracking-tight">{{ entity.name }}</h1>
+            <p class="text-muted-foreground mt-1">Financial Overview & Performance Metrics</p>
+        </div>
+        <div class="flex items-center gap-2">
+            {% include 'django_ledger/components/shadcn/button.html' with text='Export Report' variant='outline' size='default' %}
+            {% include 'django_ledger/components/shadcn/button.html' with text='New Transaction' variant='default' size='default' %}
+        </div>
+    </div>
+
+    <!-- Metrics Cards -->
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <!-- Total Assets Card -->
+        <div class="rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+                <h3 class="tracking-tight text-sm font-medium">Total Assets</h3>
+                <svg class="h-4 w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <div class="p-6 pt-0">
+                <div class="text-2xl font-bold">${{ tx_digest.assets_total|floatformat:2 }}</div>
+                <p class="text-xs text-muted-foreground mt-1">
+                    <span class="text-green-500">+12.5%</span> from last month
+                </p>
+            </div>
+        </div>
+
+        <!-- Total Liabilities Card -->
+        <div class="rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+                <h3 class="tracking-tight text-sm font-medium">Total Liabilities</h3>
+                <svg class="h-4 w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"></path>
+                </svg>
+            </div>
+            <div class="p-6 pt-0">
+                <div class="text-2xl font-bold">${{ tx_digest.liabilities_total|floatformat:2 }}</div>
+                <p class="text-xs text-muted-foreground mt-1">
+                    <span class="text-yellow-500">+3.2%</span> from last month
+                </p>
+            </div>
+        </div>
+
+        <!-- Total Equity Card -->
+        <div class="rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+                <h3 class="tracking-tight text-sm font-medium">Total Equity</h3>
+                <svg class="h-4 w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+            </div>
+            <div class="p-6 pt-0">
+                <div class="text-2xl font-bold">${{ equity_digest.equity_total|floatformat:2 }}</div>
+                <p class="text-xs text-muted-foreground mt-1">
+                    <span class="text-green-500">+15.8%</span> from last month
+                </p>
+            </div>
+        </div>
+
+        <!-- Net Income Card -->
+        <div class="rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+                <h3 class="tracking-tight text-sm font-medium">Net Income</h3>
+                <svg class="h-4 w-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+            </div>
+            <div class="p-6 pt-0">
+                <div class="text-2xl font-bold">${{ tx_digest.net_income|floatformat:2 }}</div>
+                <p class="text-xs text-muted-foreground mt-1">
+                    <span class="text-green-500">+8.4%</span> from last month
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid gap-4 md:grid-cols-7">
+        <!-- Income & Expenses Chart -->
+        <div class="col-span-4 rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+            <div class="flex flex-col space-y-1.5 p-6">
+                <h3 class="text-2xl font-semibold leading-none tracking-tight">Income & Expenses</h3>
+                <p class="text-sm text-muted-foreground">Monthly trend for the last 6 months</p>
+            </div>
+            <div class="p-6 pt-0">
+                {% chart_container pnl_chart_id pnl_chart_endpoint %}
+            </div>
+        </div>
+
+        <!-- Financial Ratios -->
+        <div class="col-span-3 rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+            <div class="flex flex-col space-y-1.5 p-6">
+                <h3 class="text-2xl font-semibold leading-none tracking-tight">Financial Ratios</h3>
+                <p class="text-sm text-muted-foreground">Key performance indicators</p>
+            </div>
+            <div class="p-6 pt-0 space-y-4">
+                <!-- Return on Equity -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium">Return on Equity</span>
+                        <span class="text-sm font-bold">{{ tx_digest.roe_percent|floatformat:2 }}%</span>
+                    </div>
+                    <div class="w-full bg-secondary rounded-full h-2">
+                        <div class="bg-primary h-2 rounded-full" style="width: {{ tx_digest.roe_percent }}%"></div>
+                    </div>
+                </div>
+
+                <!-- Return on Assets -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium">Return on Assets</span>
+                        <span class="text-sm font-bold">{{ tx_digest.roa_percent|floatformat:2 }}%</span>
+                    </div>
+                    <div class="w-full bg-secondary rounded-full h-2">
+                        <div class="bg-primary h-2 rounded-full" style="width: {{ tx_digest.roa_percent }}%"></div>
+                    </div>
+                </div>
+
+                <!-- Net Profit Margin -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium">Net Profit Margin</span>
+                        <span class="text-sm font-bold">{{ tx_digest.net_profit_margin_percent|floatformat:2 }}%</span>
+                    </div>
+                    <div class="w-full bg-secondary rounded-full h-2">
+                        <div class="bg-primary h-2 rounded-full" style="width: {{ tx_digest.net_profit_margin_percent }}%"></div>
+                    </div>
+                </div>
+
+                <!-- Gross Profit Margin -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium">Gross Profit Margin</span>
+                        <span class="text-sm font-bold">{{ tx_digest.gross_profit_margin_percent|floatformat:2 }}%</span>
+                    </div>
+                    <div class="w-full bg-secondary rounded-full h-2">
+                        <div class="bg-primary h-2 rounded-full" style="width: {{ tx_digest.gross_profit_margin_percent }}%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Balance Sheet & Income Statement -->
+    <div class="grid gap-4 md:grid-cols-2">
+        <!-- Balance Sheet Widget -->
+        <div class="rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+            <div class="flex flex-col space-y-1.5 p-6">
+                <h3 class="text-2xl font-semibold leading-none tracking-tight">Balance Sheet</h3>
+                <p class="text-sm text-muted-foreground">Assets, Liabilities & Equity</p>
+            </div>
+            <div class="p-6 pt-0">
+                {% include 'django_ledger/includes/widget_bs.html' with tx_digest=tx_digest %}
+            </div>
+        </div>
+
+        <!-- Income Statement Widget -->
+        <div class="rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+            <div class="flex flex-col space-y-1.5 p-6">
+                <h3 class="text-2xl font-semibold leading-none tracking-tight">Income Statement</h3>
+                <p class="text-sm text-muted-foreground">Revenue, Expenses & Net Income</p>
+            </div>
+            <div class="p-6 pt-0">
+                {% include 'django_ledger/includes/widget_ic.html' with tx_digest=equity_digest %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="rounded-lg border border-border bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+            <h3 class="text-2xl font-semibold leading-none tracking-tight">Quick Actions</h3>
+            <p class="text-sm text-muted-foreground">Common tasks and shortcuts</p>
+        </div>
+        <div class="p-6 pt-0">
+            <div class="grid gap-4 md:grid-cols-4">
+                <a href="{% url 'django_ledger:invoice-list' entity_slug=entity.slug %}" class="flex flex-col items-center justify-center p-4 rounded-lg border border-border hover:bg-accent transition-colors">
+                    <svg class="h-8 w-8 mb-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span class="text-sm font-medium">Invoices</span>
+                </a>
+                <a href="{% url 'django_ledger:bill-list' entity_slug=entity.slug %}" class="flex flex-col items-center justify-center p-4 rounded-lg border border-border hover:bg-accent transition-colors">
+                    <svg class="h-8 w-8 mb-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    </svg>
+                    <span class="text-sm font-medium">Bills</span>
+                </a>
+                <a href="{% url 'django_ledger:customer-list' entity_slug=entity.slug %}" class="flex flex-col items-center justify-center p-4 rounded-lg border border-border hover:bg-accent transition-colors">
+                    <svg class="h-8 w-8 mb-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    <span class="text-sm font-medium">Customers</span>
+                </a>
+                <a href="{% url 'django_ledger:vendor-list' entity_slug=entity.slug %}" class="flex flex-col items-center justify-center p-4 rounded-lg border border-border hover:bg-accent transition-colors">
+                    <svg class="h-8 w-8 mb-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                    <span class="text-sm font-medium">Vendors</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+{% endblock %}

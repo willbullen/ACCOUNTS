@@ -1,29 +1,14 @@
 {
-  "name": "django-accounting-system",
+  "name": "django-ledger",
   "version": "1.0.0",
-  "description": "![django ledger logo](https://us-east-1.linodeobjects.com/django-ledger/logo/django-ledger-logo@2x.png)",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "description": "Django Ledger with shadcn/ui",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:css": "tailwindcss -i ./static_custom/css/tailwind-input.css -o ./django_ledger/static/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./static_custom/css/tailwind-input.css -o ./django_ledger/static/tailwind.css --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/manununhez/django-accounting-system.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/manununhez/django-accounting-system/issues"
-  },
-  "homepage": "https://github.com/manununhez/django-accounting-system#readme",
-  "devDependencies": {
-    "@tailwindcss/forms": "^0.5.10",
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.16"
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15"
   }
 }

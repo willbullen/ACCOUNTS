@@ -1,0 +1,144 @@
+{% extends 'django_ledger/layouts/base_shadcn.html' %}
+{% load static %}
+
+{% block title %}shadcn/ui Components Test{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="flex" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+            <a href="{% url 'django_ledger:home' %}" class="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+                Home
+            </a>
+        </li>
+        <li>
+            <div class="flex items-center">
+                <svg class="w-6 h-6 text-muted-foreground" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="ml-1 text-sm font-medium text-foreground md:ml-2">Component Test</span>
+            </div>
+        </li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Page Header -->
+    <div>
+        <h1 class="text-3xl font-bold tracking-tight">shadcn/ui Components</h1>
+        <p class="text-muted-foreground mt-2">Testing all shadcn/ui components with black and dark blue theme</p>
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Buttons</h2>
+        <div class="flex flex-wrap gap-4">
+            {% include 'django_ledger/components/shadcn/button.html' with text='Default Button' variant='default' %}
+            {% include 'django_ledger/components/shadcn/button.html' with text='Secondary Button' variant='secondary' %}
+            {% include 'django_ledger/components/shadcn/button.html' with text='Outline Button' variant='outline' %}
+            {% include 'django_ledger/components/shadcn/button.html' with text='Ghost Button' variant='ghost' %}
+            {% include 'django_ledger/components/shadcn/button.html' with text='Destructive Button' variant='destructive' %}
+            {% include 'django_ledger/components/shadcn/button.html' with text='Link Button' variant='link' %}
+        </div>
+        <div class="flex flex-wrap gap-4">
+            {% include 'django_ledger/components/shadcn/button.html' with text='Small Button' size='sm' %}
+            {% include 'django_ledger/components/shadcn/button.html' with text='Default Size' size='default' %}
+            {% include 'django_ledger/components/shadcn/button.html' with text='Large Button' size='lg' %}
+        </div>
+    </div>
+
+    <!-- Badges Section -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Badges</h2>
+        <div class="flex flex-wrap gap-4">
+            {% include 'django_ledger/components/shadcn/badge.html' with text='Default' variant='default' %}
+            {% include 'django_ledger/components/shadcn/badge.html' with text='Secondary' variant='secondary' %}
+            {% include 'django_ledger/components/shadcn/badge.html' with text='Outline' variant='outline' %}
+            {% include 'django_ledger/components/shadcn/badge.html' with text='Success' variant='success' %}
+            {% include 'django_ledger/components/shadcn/badge.html' with text='Warning' variant='warning' %}
+            {% include 'django_ledger/components/shadcn/badge.html' with text='Destructive' variant='destructive' %}
+        </div>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Cards</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% include 'django_ledger/components/shadcn/card.html' with title='Card Title' description='This is a card description' content='<p>Card content goes here. This is a simple card component with title, description, and content.</p>' %}
+            
+            {% include 'django_ledger/components/shadcn/card.html' with title='Another Card' description='With different content' content='<p>Cards can contain any content including forms, lists, or other components.</p>' %}
+            
+            {% include 'django_ledger/components/shadcn/card.html' with title='Third Card' description='More examples' content='<p>The card component is versatile and can be used for many different purposes.</p>' %}
+        </div>
+    </div>
+
+    <!-- Alerts Section -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Alerts</h2>
+        <div class="space-y-4">
+            {% include 'django_ledger/components/shadcn/alert.html' with variant='default' title='Default Alert' description='This is a default alert message.' %}
+            {% include 'django_ledger/components/shadcn/alert.html' with variant='info' title='Info Alert' description='This is an informational message.' %}
+            {% include 'django_ledger/components/shadcn/alert.html' with variant='success' title='Success Alert' description='Your action was completed successfully!' %}
+            {% include 'django_ledger/components/shadcn/alert.html' with variant='warning' title='Warning Alert' description='Please be careful with this action.' %}
+            {% include 'django_ledger/components/shadcn/alert.html' with variant='destructive' title='Error Alert' description='Something went wrong. Please try again.' %}
+        </div>
+    </div>
+
+    <!-- Form Inputs Section -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Form Inputs</h2>
+        {% include 'django_ledger/components/shadcn/card.html' with title='Form Example' content=form_content %}
+        <div class="p-6 bg-card rounded-lg border border-border">
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Text Input</label>
+                    {% include 'django_ledger/components/shadcn/input.html' with name='text' placeholder='Enter text...' %}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email Input</label>
+                    {% include 'django_ledger/components/shadcn/input.html' with name='email' type='email' placeholder='Enter email...' %}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Select Input</label>
+                    {% include 'django_ledger/components/shadcn/select.html' with name='country' placeholder='Select a country...' %}
+                </div>
+                <div>
+                    {% include 'django_ledger/components/shadcn/checkbox.html' with name='agree' label='I agree to the terms and conditions' %}
+                </div>
+                <div class="flex gap-2">
+                    {% include 'django_ledger/components/shadcn/button.html' with text='Submit' type='submit' %}
+                    {% include 'django_ledger/components/shadcn/button.html' with text='Cancel' variant='outline' %}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Color Palette -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Color Palette (Black & Dark Blue)</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="p-4 bg-background border border-border rounded-lg">
+                <div class="h-20 bg-background rounded mb-2"></div>
+                <p class="text-sm font-medium">Background</p>
+            </div>
+            <div class="p-4 bg-background border border-border rounded-lg">
+                <div class="h-20 bg-card rounded mb-2"></div>
+                <p class="text-sm font-medium">Card</p>
+            </div>
+            <div class="p-4 bg-background border border-border rounded-lg">
+                <div class="h-20 bg-primary rounded mb-2"></div>
+                <p class="text-sm font-medium">Primary (Dark Blue)</p>
+            </div>
+            <div class="p-4 bg-background border border-border rounded-lg">
+                <div class="h-20 bg-secondary rounded mb-2"></div>
+                <p class="text-sm font-medium">Secondary</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

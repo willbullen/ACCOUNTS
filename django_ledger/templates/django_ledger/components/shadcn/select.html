@@ -1,0 +1,22 @@
+{% comment %}
+Select Component
+Usage: {% include 'django_ledger/components/shadcn/select.html' with name='country' options=countries %}
+{% endcomment %}
+
+<select 
+    name="{{ name }}"
+    id="{{ id|default:name }}"
+    {% if required %}required{% endif %}
+    {% if disabled %}disabled{% endif %}
+    class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 {{ class }}"
+    {{ attrs }}>
+    {% if placeholder %}
+    <option value="">{{ placeholder }}</option>
+    {% endif %}
+    {% if options %}
+        {% for option in options %}
+        <option value="{{ option.value }}" {% if option.value == value %}selected{% endif %}>{{ option.label }}</option>
+        {% endfor %}
+    {% endif %}
+    {{ content }}
+</select>
