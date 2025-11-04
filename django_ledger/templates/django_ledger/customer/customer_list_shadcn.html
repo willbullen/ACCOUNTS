@@ -88,6 +88,10 @@
                                    class="px-3 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded text-xs text-white transition-colors">
                                     View
                                 </a>
+                                <a href="{% url 'customer-detail-shadcn' entity_slug=view.kwargs.entity_slug customer_pk=customer.uuid %}"
+                                   class="px-3 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded text-xs text-white transition-colors">
+                                    View
+                                </a>
                                 <a href="{% url 'customer-update-shadcn' entity_slug=view.kwargs.entity_slug customer_pk=customer.uuid %}"
                                    class="px-3 py-1 bg-blue-900/50 hover:bg-blue-800/50 border border-blue-700 rounded text-xs text-blue-300 transition-colors">
                                     Edit

@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from dev_env import views
 from dev_env.views_invoice import InvoiceListShadcnView, InvoiceCreateShadcnView, InvoiceDetailShadcnView, InvoiceUpdateShadcnView
-from dev_env.views_lists import BillListShadcnView, BillCreateShadcnView, BillDetailShadcnView, BillUpdateShadcnView, CustomerListShadcnView, CustomerCreateShadcnView, CustomerUpdateShadcnView, VendorListShadcnView, VendorCreateShadcnView, VendorUpdateShadcnView
+from dev_env.views_lists import BillListShadcnView, BillCreateShadcnView, BillDetailShadcnView, BillUpdateShadcnView, CustomerListShadcnView, CustomerCreateShadcnView, CustomerDetailShadcnView, CustomerUpdateShadcnView, VendorListShadcnView, VendorCreateShadcnView, VendorDetailShadcnView, VendorUpdateShadcnView
 from dev_env.views_entity import EntityCreateShadcnView
 
 from django_ledger.settings import DJANGO_LEDGER_GRAPHQL_SUPPORT_ENABLED
@@ -23,9 +23,11 @@ urlpatterns = [
     path('entity/<slug:entity_slug>/bill/<uuid:bill_pk>/update-shadcn/', BillUpdateShadcnView.as_view(), name='bill-update-shadcn'),
     path('entity/<slug:entity_slug>/customers-shadcn/', CustomerListShadcnView.as_view(), name='customer-list-shadcn'),
     path('entity/<slug:entity_slug>/customer/create-shadcn/', CustomerCreateShadcnView.as_view(), name='customer-create-shadcn'),
+    path('entity/<slug:entity_slug>/customer/<uuid:customer_pk>/detail-shadcn/', CustomerDetailShadcnView.as_view(), name='customer-detail-shadcn'),
     path('entity/<slug:entity_slug>/customer/<uuid:customer_pk>/update-shadcn/', CustomerUpdateShadcnView.as_view(), name='customer-update-shadcn'),
     path('entity/<slug:entity_slug>/vendors-shadcn/', VendorListShadcnView.as_view(), name='vendor-list-shadcn'),
     path('entity/<slug:entity_slug>/vendor/create-shadcn/', VendorCreateShadcnView.as_view(), name='vendor-create-shadcn'),
+    path('entity/<slug:entity_slug>/vendor/<uuid:vendor_pk>/detail-shadcn/', VendorDetailShadcnView.as_view(), name='vendor-detail-shadcn'),
     path('entity/<slug:entity_slug>/vendor/<uuid:vendor_pk>/update-shadcn/', VendorUpdateShadcnView.as_view(), name='vendor-update-shadcn'),
     path('entity/create-shadcn/', EntityCreateShadcnView.as_view(), name='entity-create-shadcn'),
     path('dashboard/', dashboard_dark_view, name='dashboard_dark'),
