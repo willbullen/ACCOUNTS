@@ -36,7 +36,7 @@
         </button>
         <div id="management-content" class="space-y-1 mt-2">
             {% if entity %}
-            <a href="{% url 'django_ledger:vendor-list' entity_slug=entity.slug %}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
+            <a href="{% url 'vendor-list-shadcn' entity_slug=entity.slug %}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
             {% else %}
             <a href="#" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
             {% endif %}
@@ -46,7 +46,7 @@
                 <span>{% trans 'Vendors' %}</span>
             </a>
             {% if entity %}
-            <a href="{% url 'django_ledger:customer-list' entity_slug=entity.slug %}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
+            <a href="{% url 'customer-list-shadcn' entity_slug=entity.slug %}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
             {% else %}
             <a href="#" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
             {% endif %}
@@ -56,7 +56,7 @@
                 <span>{% trans 'Customers' %}</span>
             </a>
             {% if entity %}
-            <a href="{% url 'django_ledger:bank-account-list' entity_slug=entity.slug %}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
+            <a href="{% url 'bank-account-list-shadcn' entity_slug=entity.slug %}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
             {% else %}
             <a href="#" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
             {% endif %}
@@ -76,7 +76,7 @@
                 <span>{% trans 'Estimates & Contracts' %}</span>
             </a>
             {% if entity %}
-            <a href="{% url 'django_ledger:bill-list' entity_slug=entity.slug %}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
+            <a href="{% url 'bill-list-shadcn' entity_slug=entity.slug %}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
             {% else %}
             <a href="#" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
             {% endif %}
@@ -86,7 +86,7 @@
                 <span>{% trans 'Bills' %}</span>
             </a>
             {% if entity %}
-            <a href="{% url 'django_ledger:invoice-list' entity_slug=entity.slug %}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
+            <a href="{% url 'invoice-list-shadcn' entity_slug=entity.slug %}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
             {% else %}
             <a href="#" class="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent transition-colors">
             {% endif %}
