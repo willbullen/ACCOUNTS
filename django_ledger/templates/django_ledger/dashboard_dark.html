@@ -1,0 +1,314 @@
+{% extends 'django_ledger/layouts/base_dark.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content-header">
+    <div>
+        <h1 class="content-title">Documents</h1>
+        <p class="content-subtitle">Financial overview and analytics</p>
+    </div>
+    <a href="https://github.com" target="_blank" class="btn">
+        <svg style="width: 16px; height: 16px; margin-right: 0.5rem; display: inline-block;" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+        GitHub
+    </a>
+</div>
+
+<!-- Metrics Grid -->
+<div class="metrics-grid">
+    <div class="metric-card">
+        <div class="metric-header">
+            <div class="metric-label">Total Revenue</div>
+            <div class="metric-trend positive">
+                <svg style="width: 12px; height: 12px; margin-right: 0.25rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+                +12.5%
+            </div>
+        </div>
+        <div class="metric-value">$1,250.00</div>
+        <div class="metric-description">
+            <svg style="width: 12px; height: 12px; margin-right: 0.25rem; display: inline-block;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            </svg>
+            Trending up this month
+        </div>
+        <div class="metric-description" style="margin-top: 0.25rem; opacity: 0.7;">Visitors for the last 6 months</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-header">
+            <div class="metric-label">New Customers</div>
+            <div class="metric-trend negative">
+                <svg style="width: 12px; height: 12px; margin-right: 0.25rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                -20%
+            </div>
+        </div>
+        <div class="metric-value">1,234</div>
+        <div class="metric-description">
+            <svg style="width: 12px; height: 12px; margin-right: 0.25rem; display: inline-block;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+            </svg>
+            Down 20% this period
+        </div>
+        <div class="metric-description" style="margin-top: 0.25rem; opacity: 0.7;">Acquisition needs attention</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-header">
+            <div class="metric-label">Active Accounts</div>
+            <div class="metric-trend positive">
+                <svg style="width: 12px; height: 12px; margin-right: 0.25rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+                +12.5%
+            </div>
+        </div>
+        <div class="metric-value">45,678</div>
+        <div class="metric-description">
+            <svg style="width: 12px; height: 12px; margin-right: 0.25rem; display: inline-block;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            </svg>
+            Strong user retention
+        </div>
+        <div class="metric-description" style="margin-top: 0.25rem; opacity: 0.7;">Engagement exceed targets</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-header">
+            <div class="metric-label">Growth Rate</div>
+            <div class="metric-trend positive">
+                <svg style="width: 12px; height: 12px; margin-right: 0.25rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+                +4.5%
+            </div>
+        </div>
+        <div class="metric-value">4.5%</div>
+        <div class="metric-description">
+            <svg style="width: 12px; height: 12px; margin-right: 0.25rem; display: inline-block;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            </svg>
+            Steady performance increase
+        </div>
+        <div class="metric-description" style="margin-top: 0.25rem; opacity: 0.7;">Meets growth projections</div>
+    </div>
+</div>
+
+<!-- Chart Section -->
+<div class="chart-section">
+    <div class="chart-header">
+        <div>
+            <h2 class="chart-title">Total Visitors</h2>
+            <p class="chart-subtitle">Total for the last 3 months</p>
+        </div>
+        <div class="chart-tabs">
+            <button class="chart-tab active">Last 3 months</button>
+            <button class="chart-tab">Last 30 days</button>
+            <button class="chart-tab">Last 7 days</button>
+        </div>
+    </div>
+    <div class="chart-container">
+        <canvas id="visitorsChart"></canvas>
+    </div>
+</div>
+
+<!-- Table Section -->
+<div class="table-section">
+    <div class="table-header">
+        <div class="table-tabs">
+            <button class="table-tab active">Outline</button>
+            <button class="table-tab">Past Performance</button>
+            <button class="table-tab">Key Personnel</button>
+            <button class="table-tab">Focus Documents</button>
+        </div>
+        <div class="table-actions">
+            <button class="btn">
+                <svg style="width: 16px; height: 16px; margin-right: 0.5rem; display: inline-block;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                Customize Columns
+            </button>
+            <button class="btn btn-primary">
+                <svg style="width: 16px; height: 16px; margin-right: 0.5rem; display: inline-block;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add Section
+            </button>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Header</th>
+                <th>Section Type</th>
+                <th>Status</th>
+                <th>Target</th>
+                <th>Limit</th>
+                <th>Reviewer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                    </svg>
+                </td>
+                <td>Cover page</td>
+                <td>Cover page</td>
+                <td><span class="status-badge in-progress">In Process</span></td>
+                <td>18</td>
+                <td>5</td>
+                <td>Eddie Lake</td>
+            </tr>
+            <tr>
+                <td>
+                    <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                    </svg>
+                </td>
+                <td>Table of contents</td>
+                <td>Table of contents</td>
+                <td><span class="status-badge done">Done</span></td>
+                <td>29</td>
+                <td>24</td>
+                <td>Eddie Lake</td>
+            </tr>
+            <tr>
+                <td>
+                    <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                    </svg>
+                </td>
+                <td>Executive summary</td>
+                <td>Narrative</td>
+                <td><span class="status-badge done">Done</span></td>
+                <td>10</td>
+                <td>13</td>
+                <td>Eddie Lake</td>
+            </tr>
+            <tr>
+                <td>
+                    <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                    </svg>
+                </td>
+                <td>Technical approach</td>
+                <td>Narrative</td>
+                <td><span class="status-badge done">Done</span></td>
+                <td>27</td>
+                <td>23</td>
+                <td>Janek Tschigabuov</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+// Chart.js configuration for the visitors chart
+const ctx = document.getElementById('visitorsChart');
+if (ctx) {
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Apr 3', 'Apr 11', 'Apr 20', 'Apr 29', 'May 7', 'May 16', 'May 25', 'Jun 3', 'Jun 11', 'Jun 20', 'Jun 30'],
+            datasets: [
+                {
+                    label: 'Series 1',
+                    data: [300, 450, 320, 480, 520, 380, 420, 550, 480, 520, 490],
+                    borderColor: '#6b7280',
+                    backgroundColor: 'rgba(107, 114, 128, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 2
+                },
+                {
+                    label: 'Series 2',
+                    data: [200, 350, 280, 420, 460, 320, 380, 490, 420, 460, 430],
+                    borderColor: '#9ca3af',
+                    backgroundColor: 'rgba(156, 163, 175, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 2
+                },
+                {
+                    label: 'Series 3',
+                    data: [100, 250, 180, 320, 360, 220, 280, 390, 320, 360, 330],
+                    borderColor: '#d1d5db',
+                    backgroundColor: 'rgba(209, 213, 219, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 2
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: '#1a1a1a',
+                    titleColor: '#ffffff',
+                    bodyColor: '#a1a1a1',
+                    borderColor: '#2a2a2a',
+                    borderWidth: 1
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: '#2a2a2a',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        color: '#737373'
+                    }
+                },
+                x: {
+                    grid: {
+                        color: '#2a2a2a',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        color: '#737373'
+                    }
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+                axis: 'x',
+                intersect: false
+            }
+        }
+    });
+}
+
+// Tab switching functionality
+document.querySelectorAll('.chart-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+    });
+});
+
+document.querySelectorAll('.table-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        document.querySelectorAll('.table-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+    });
+});
+</script>
+{% endblock %}

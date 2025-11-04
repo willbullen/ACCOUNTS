@@ -1,0 +1,910 @@
+/* Global Dark Theme for Django Ledger - shadcn/ui inspired */
+
+:root {
+  /* Dark theme colors */
+  --dark-bg: #0a0a0a;
+  --dark-card: #1a1a1a;
+  --dark-border: #2a2a2a;
+  --dark-hover: #2d2d2d;
+  --dark-input: #1f1f1f;
+  
+  /* Text colors */
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1a1;
+  --text-muted: #737373;
+  
+  /* Accent colors */
+  --accent-blue: #3b82f6;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+  --accent-yellow: #f59e0b;
+  --accent-purple: #8b5cf6;
+  
+  /* Bulma overrides */
+  --bulma-primary: #3b82f6;
+  --bulma-link: #3b82f6;
+  --bulma-success: #10b981;
+  --bulma-danger: #ef4444;
+  --bulma-warning: #f59e0b;
+  --bulma-info: #3b82f6;
+}
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--dark-bg) !important;
+  color: var(--text-primary) !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Override Bulma styles */
+.section {
+  background-color: var(--dark-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+.container {
+  background-color: transparent !important;
+}
+
+.hero {
+  background-color: var(--dark-card) !important;
+  color: var(--text-primary) !important;
+}
+
+.hero.is-primary {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%) !important;
+}
+
+.hero-body {
+  background-color: transparent !important;
+}
+
+/* Cards */
+.card, .box {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  border-radius: 8px !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+.card-header {
+  background-color: var(--dark-card) !important;
+  border-bottom: 1px solid var(--dark-border) !important;
+  color: var(--text-primary) !important;
+}
+
+.card-header-title {
+  color: var(--text-primary) !important;
+}
+
+.card-content {
+  background-color: var(--dark-card) !important;
+  color: var(--text-primary) !important;
+}
+
+.card-footer {
+  background-color: var(--dark-card) !important;
+  border-top: 1px solid var(--dark-border) !important;
+}
+
+.card-footer-item {
+  color: var(--text-secondary) !important;
+  border-color: var(--dark-border) !important;
+}
+
+/* Navigation */
+.navbar {
+  background-color: var(--dark-card) !important;
+  border-bottom: 1px solid var(--dark-border) !important;
+}
+
+.navbar-item, .navbar-link {
+  color: var(--text-secondary) !important;
+}
+
+.navbar-item:hover, .navbar-link:hover {
+  background-color: var(--dark-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+.navbar-dropdown {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+
+.navbar-dropdown .navbar-item {
+  color: var(--text-secondary) !important;
+}
+
+.navbar-dropdown .navbar-item:hover {
+  background-color: var(--dark-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+.navbar-burger {
+  color: var(--text-primary) !important;
+}
+
+/* Buttons */
+.button {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--text-primary) !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background-color: var(--dark-hover) !important;
+  border-color: var(--text-muted) !important;
+}
+
+.button.is-primary {
+  background-color: var(--accent-blue) !important;
+  border-color: var(--accent-blue) !important;
+  color: white !important;
+}
+
+.button.is-primary:hover {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+.button.is-success {
+  background-color: var(--accent-green) !important;
+  border-color: var(--accent-green) !important;
+  color: white !important;
+}
+
+.button.is-success:hover {
+  background-color: #059669 !important;
+}
+
+.button.is-danger {
+  background-color: var(--accent-red) !important;
+  border-color: var(--accent-red) !important;
+  color: white !important;
+}
+
+.button.is-danger:hover {
+  background-color: #dc2626 !important;
+}
+
+.button.is-warning {
+  background-color: var(--accent-yellow) !important;
+  border-color: var(--accent-yellow) !important;
+  color: white !important;
+}
+
+.button.is-info {
+  background-color: var(--accent-blue) !important;
+  border-color: var(--accent-blue) !important;
+  color: white !important;
+}
+
+.button.is-link {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: var(--accent-blue) !important;
+  text-decoration: none !important;
+}
+
+.button.is-link:hover {
+  background-color: var(--dark-hover) !important;
+  color: var(--accent-blue) !important;
+}
+
+/* Forms */
+.input, .textarea, .select select {
+  background-color: var(--dark-input) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--text-primary) !important;
+  border-radius: 6px !important;
+}
+
+.input:focus, .textarea:focus, .select select:focus {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 0 0 0.125em rgba(59, 130, 246, 0.25) !important;
+}
+
+.input::placeholder, .textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
+.label {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+}
+
+.help {
+  color: var(--text-secondary) !important;
+}
+
+.control.has-icons-left .icon, .control.has-icons-right .icon {
+  color: var(--text-muted) !important;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: var(--text-primary) !important;
+}
+
+.checkbox, .radio {
+  color: var(--text-primary) !important;
+}
+
+.file-cta {
+  background-color: var(--dark-card) !important;
+  border-color: var(--dark-border) !important;
+  color: var(--text-primary) !important;
+}
+
+.file-name {
+  background-color: var(--dark-input) !important;
+  border-color: var(--dark-border) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Tables */
+.table {
+  background-color: var(--dark-card) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--dark-border) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.table thead {
+  background-color: var(--dark-bg) !important;
+}
+
+.table thead th {
+  color: var(--text-primary) !important;
+  border-bottom: 2px solid var(--dark-border) !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.table tbody tr {
+  background-color: var(--dark-card) !important;
+  border-bottom: 1px solid var(--dark-border) !important;
+}
+
+.table tbody tr:hover {
+  background-color: var(--dark-hover) !important;
+}
+
+.table tbody td {
+  color: var(--text-secondary) !important;
+  border-color: var(--dark-border) !important;
+}
+
+.table.is-striped tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+.table.is-hoverable tbody tr:hover {
+  background-color: var(--dark-hover) !important;
+}
+
+/* Pagination */
+.pagination-previous, .pagination-next, .pagination-link {
+  background-color: var(--dark-card) !important;
+  border-color: var(--dark-border) !important;
+  color: var(--text-primary) !important;
+}
+
+.pagination-previous:hover, .pagination-next:hover, .pagination-link:hover {
+  background-color: var(--dark-hover) !important;
+  border-color: var(--text-muted) !important;
+}
+
+.pagination-link.is-current {
+  background-color: var(--accent-blue) !important;
+  border-color: var(--accent-blue) !important;
+  color: white !important;
+}
+
+/* Tabs */
+.tabs {
+  border-bottom-color: var(--dark-border) !important;
+}
+
+.tabs a {
+  color: var(--text-secondary) !important;
+  border-bottom-color: transparent !important;
+}
+
+.tabs a:hover {
+  color: var(--text-primary) !important;
+  border-bottom-color: var(--dark-border) !important;
+}
+
+.tabs li.is-active a {
+  color: var(--accent-blue) !important;
+  border-bottom-color: var(--accent-blue) !important;
+}
+
+/* Messages/Notifications */
+.message {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  border-radius: 8px !important;
+}
+
+.message-header {
+  background-color: var(--dark-bg) !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--dark-border) !important;
+}
+
+.message-body {
+  background-color: var(--dark-card) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--dark-border) !important;
+}
+
+.notification {
+  background-color: var(--dark-card) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--dark-border) !important;
+  border-radius: 8px !important;
+}
+
+.notification.is-primary {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+  border-color: var(--accent-blue) !important;
+  color: var(--accent-blue) !important;
+}
+
+.notification.is-success {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  border-color: var(--accent-green) !important;
+  color: var(--accent-green) !important;
+}
+
+.notification.is-danger {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  border-color: var(--accent-red) !important;
+  color: var(--accent-red) !important;
+}
+
+.notification.is-warning {
+  background-color: rgba(245, 158, 11, 0.1) !important;
+  border-color: var(--accent-yellow) !important;
+  color: var(--accent-yellow) !important;
+}
+
+.notification.is-info {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+  border-color: var(--accent-blue) !important;
+  color: var(--accent-blue) !important;
+}
+
+/* Tags/Badges */
+.tag {
+  background-color: var(--dark-hover) !important;
+  color: var(--text-primary) !important;
+  border-radius: 4px !important;
+}
+
+.tag.is-primary {
+  background-color: var(--accent-blue) !important;
+  color: white !important;
+}
+
+.tag.is-success {
+  background-color: var(--accent-green) !important;
+  color: white !important;
+}
+
+.tag.is-danger {
+  background-color: var(--accent-red) !important;
+  color: white !important;
+}
+
+.tag.is-warning {
+  background-color: var(--accent-yellow) !important;
+  color: white !important;
+}
+
+.tag.is-info {
+  background-color: var(--accent-blue) !important;
+  color: white !important;
+}
+
+/* Modals */
+.modal-background {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.modal-card {
+  background-color: var(--dark-card) !important;
+}
+
+.modal-card-head {
+  background-color: var(--dark-bg) !important;
+  border-bottom: 1px solid var(--dark-border) !important;
+}
+
+.modal-card-title {
+  color: var(--text-primary) !important;
+}
+
+.modal-card-body {
+  background-color: var(--dark-card) !important;
+  color: var(--text-primary) !important;
+}
+
+.modal-card-foot {
+  background-color: var(--dark-bg) !important;
+  border-top: 1px solid var(--dark-border) !important;
+}
+
+.modal-content {
+  background-color: var(--dark-card) !important;
+  color: var(--text-primary) !important;
+}
+
+.delete {
+  background-color: var(--dark-hover) !important;
+}
+
+.delete:hover {
+  background-color: var(--accent-red) !important;
+}
+
+/* Dropdown */
+.dropdown-content {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dropdown-item {
+  color: var(--text-secondary) !important;
+}
+
+.dropdown-item:hover {
+  background-color: var(--dark-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+.dropdown-divider {
+  background-color: var(--dark-border) !important;
+}
+
+/* Menu */
+.menu-list a {
+  color: var(--text-secondary) !important;
+  border-radius: 6px !important;
+}
+
+.menu-list a:hover {
+  background-color: var(--dark-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+.menu-list a.is-active {
+  background-color: var(--accent-blue) !important;
+  color: white !important;
+}
+
+.menu-label {
+  color: var(--text-muted) !important;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Panel */
+.panel {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  border-radius: 8px !important;
+}
+
+.panel-heading {
+  background-color: var(--dark-bg) !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--dark-border) !important;
+}
+
+.panel-block {
+  color: var(--text-primary) !important;
+  border-color: var(--dark-border) !important;
+}
+
+.panel-block:hover {
+  background-color: var(--dark-hover) !important;
+}
+
+.panel-tabs a {
+  color: var(--text-secondary) !important;
+  border-bottom-color: var(--dark-border) !important;
+}
+
+.panel-tabs a.is-active {
+  color: var(--accent-blue) !important;
+  border-bottom-color: var(--accent-blue) !important;
+}
+
+/* Breadcrumb */
+.breadcrumb a {
+  color: var(--text-secondary) !important;
+}
+
+.breadcrumb a:hover {
+  color: var(--text-primary) !important;
+}
+
+.breadcrumb li.is-active a {
+  color: var(--text-primary) !important;
+}
+
+.breadcrumb li + li::before {
+  color: var(--text-muted) !important;
+}
+
+/* Progress bars */
+.progress {
+  background-color: var(--dark-hover) !important;
+}
+
+.progress::-webkit-progress-value {
+  background-color: var(--accent-blue) !important;
+}
+
+.progress::-moz-progress-bar {
+  background-color: var(--accent-blue) !important;
+}
+
+/* Title and subtitle */
+.title {
+  color: var(--text-primary) !important;
+}
+
+.subtitle {
+  color: var(--text-secondary) !important;
+}
+
+/* Content */
+.content {
+  color: var(--text-primary) !important;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  color: var(--text-primary) !important;
+}
+
+.content a {
+  color: var(--accent-blue) !important;
+}
+
+.content a:hover {
+  color: #2563eb !important;
+}
+
+.content blockquote {
+  background-color: var(--dark-card) !important;
+  border-left-color: var(--accent-blue) !important;
+  color: var(--text-secondary) !important;
+}
+
+.content code {
+  background-color: var(--dark-hover) !important;
+  color: var(--accent-blue) !important;
+  padding: 0.25em 0.5em;
+  border-radius: 4px;
+}
+
+.content pre {
+  background-color: var(--dark-hover) !important;
+  color: var(--text-primary) !important;
+  border-radius: 6px !important;
+}
+
+.content table {
+  background-color: var(--dark-card) !important;
+  color: var(--text-primary) !important;
+}
+
+.content table thead {
+  background-color: var(--dark-bg) !important;
+}
+
+.content table thead th {
+  color: var(--text-primary) !important;
+  border-bottom-color: var(--dark-border) !important;
+}
+
+.content table tbody tr {
+  border-bottom-color: var(--dark-border) !important;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--dark-card) !important;
+  border-top: 1px solid var(--dark-border) !important;
+  color: var(--text-secondary) !important;
+}
+
+.footer a {
+  color: var(--accent-blue) !important;
+}
+
+.footer a:hover {
+  color: #2563eb !important;
+}
+
+/* Links */
+a {
+  color: var(--accent-blue) !important;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2563eb !important;
+}
+
+/* HR */
+hr {
+  background-color: var(--dark-border) !important;
+  border: none;
+  height: 1px;
+}
+
+/* Level */
+.level {
+  color: var(--text-primary) !important;
+}
+
+/* Media */
+.media {
+  border-color: var(--dark-border) !important;
+}
+
+/* Columns */
+.column {
+  color: var(--text-primary) !important;
+}
+
+/* Specific Django Ledger elements */
+.djetler-card {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  border-radius: 8px !important;
+  color: var(--text-primary) !important;
+}
+
+/* Login page specific */
+.login-container {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  border-radius: 8px !important;
+  padding: 2rem;
+}
+
+/* Entity dashboard */
+.entity-card {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease;
+}
+
+.entity-card:hover {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-hover);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent-blue);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--accent-blue);
+  color: white;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .card, .box, .panel {
+    border-radius: 6px !important;
+  }
+}
+
+/* Utility classes */
+.has-text-primary {
+  color: var(--text-primary) !important;
+}
+
+.has-text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.has-text-muted {
+  color: var(--text-muted) !important;
+}
+
+.has-background-dark {
+  background-color: var(--dark-bg) !important;
+}
+
+.has-background-card {
+  background-color: var(--dark-card) !important;
+}
+
+/* Stronger overrides for navbar and hero - ADDED */
+.navbar, .navbar-menu, .navbar-start, .navbar-end {
+  background-color: var(--dark-card) !important;
+}
+
+.hero.is-primary, .hero.is-info, .hero.is-success {
+  background: var(--dark-card) !important;
+}
+
+.hero.is-fullheight {
+  background-color: var(--dark-bg) !important;
+}
+
+/* Override all colored hero sections */
+.hero.is-primary .hero-body, .hero.is-info .hero-body, .hero.is-success .hero-body {
+  background-color: transparent !important;
+}
+
+/* Navbar brand and burger */
+.navbar-brand {
+  background-color: transparent !important;
+}
+
+.navbar-brand .navbar-item {
+  color: var(--text-primary) !important;
+}
+
+/* Override any teal/green/cyan colors from Bulma */
+.is-primary, .has-background-primary {
+  background-color: var(--dark-card) !important;
+}
+
+.is-info, .has-background-info {
+  background-color: var(--dark-card) !important;
+}
+
+/* Make sure all sections are dark */
+section {
+  background-color: var(--dark-bg) !important;
+}
+
+section.hero {
+  background: var(--dark-card) !important;
+}
+
+/* Specific fix for hero with background image */
+#djl-login-bg-image {
+  background-color: var(--dark-bg) !important;
+  background-blend-mode: overlay;
+}
+
+/* Override inline background styles */
+.hero[style*="background-color"] {
+  background-color: var(--dark-card) !important;
+}
+
+/* Footer links and text */
+.footer strong {
+  color: var(--text-primary) !important;
+}
+
+/* Make all text inputs consistently dark */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="time"] {
+  background-color: var(--dark-input) !important;
+  border-color: var(--dark-border) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Select dropdowns */
+select {
+  background-color: var(--dark-input) !important;
+  border-color: var(--dark-border) !important;
+  color: var(--text-primary) !important;
+}
+
+select option {
+  background-color: var(--dark-card) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Checkbox and radio */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--accent-blue);
+}
+
+/* Django form fields */
+.field label {
+  color: var(--text-primary) !important;
+}
+
+/* Error and success states */
+.help.is-danger {
+  color: var(--accent-red) !important;
+}
+
+.help.is-success {
+  color: var(--accent-green) !important;
+}
+
+/* Ensure white text on colored buttons */
+.button.is-primary, .button.is-success, .button.is-danger, .button.is-warning, .button.is-info {
+  color: white !important;
+}
+
+/* Disabled state */
+.button[disabled], .input[disabled], .textarea[disabled], .select select[disabled] {
+  background-color: var(--dark-hover) !important;
+  border-color: var(--dark-border) !important;
+  color: var(--text-muted) !important;
+  opacity: 0.5;
+}
+
+/* Placeholder text */
+::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1;
+}
+
+/* Override Bulma's default teal/turquoise color scheme */
+.has-background-info, .has-background-primary, .has-background-link {
+  background-color: var(--dark-card) !important;
+}
+
+.has-text-info, .has-text-primary, .has-text-link {
+  color: var(--accent-blue) !important;
+}
+
+/* Make hero sections consistently dark */
+.hero.is-primary, .hero.is-link, .hero.is-info {
+  background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-hover) 100%) !important;
+}

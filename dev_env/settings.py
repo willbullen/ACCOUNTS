@@ -10,8 +10,8 @@ if not SECRET_KEY:
     SECRET_KEY = 'djangoledger1234!DoNotUse!BadIdea!VeryInsecure!'
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.102', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.102', 'localhost', '0.0.0.0', '*']
+CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev', 'https://*.manusvm.computer']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -31,6 +31,7 @@ if DJANGO_LEDGER_GRAPHQL_SUPPORT_ENABLED:
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -102,6 +103,8 @@ USE_L10N = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_custom')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 LOGIN_URL = '/auth/login/'
 
 AUTHENTICATION_BACKENDS = [

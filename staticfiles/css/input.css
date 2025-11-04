@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom dark theme styles */
+@layer base {
+  body {
+    @apply bg-dark-bg text-gray-100;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-dark-card border border-dark-border rounded-lg p-6;
+  }
+  
+  .sidebar {
+    @apply bg-dark-card border-r border-dark-border;
+  }
+  
+  .metric-card {
+    @apply bg-dark-card border border-dark-border rounded-lg p-6 hover:border-gray-600 transition-colors;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+  
+  .table-dark {
+    @apply w-full text-sm text-left text-gray-300;
+  }
+  
+  .table-dark thead {
+    @apply text-xs text-gray-400 uppercase bg-dark-card border-b border-dark-border;
+  }
+  
+  .table-dark tbody tr {
+    @apply border-b border-dark-border hover:bg-dark-card/50;
+  }
+  
+  .table-dark td, .table-dark th {
+    @apply px-6 py-4;
+  }
+}
